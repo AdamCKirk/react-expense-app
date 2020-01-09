@@ -1,7 +1,3 @@
 # Git Commands
 
-git init - create a new git repo
-git status - View the changes to your project
-git add - Add files to staging area
-git commit - Creates a new commit with files from staging area
-git log - View recent commits
+This is a simple App that allows users to create expense items. These items are then displayed on the dashboard and can be edited or deleted as required.
