@@ -1,23 +1,32 @@
 import uuid from 'uuid';
+import database from '../firebase/firebase'
 
 // ADD_EXPENSE
-export const addExpense = (
-    {
-        description = '',
-        note ='',
-        amount = 0,
-        createdAt = 0 
-    } = {}) => ({
-        type: 'ADD_EXPENSE',
-        expense: {
-            id: uuid(),
-            description,
-            note,
-            amount,
-            createdAt
-        }
+export const addExpense = (expense) => ({
+    type: 'ADD_EXPENSE',
+    expense
+});
+
+// This method returns a method. Normally Redux would not allow this however I have added
+// redux_thunk so that I am able to do this. This helps with calls and state change to firebase
+export const startAddExpense = (expenseData = {}) => {
+    return (dispatch) => {
+        const {
+            description = '',
+            note ='',
+            amount = 0,
+            createdAt = 0 
+        } = expenseData;
+        const expense = { description, note, amount, createdAt}
+
+        return database.ref('expenses').push(expense).then((ref) => {
+            dispatch(addExpense({
+                id: ref.key,
+                ...expense
+            }));
+        })
     }
-);
+};
 
 // REMOVE_EXPENSE
 export const removeExpense = ({ id } = {}) => ({
