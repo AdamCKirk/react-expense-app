@@ -18,6 +18,7 @@ import { firebase } from './firebase/firebase';
 //Components
 import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth';
+import LoadingPage from './components/LoadingPage'
 
 const store = configureStore();
 
@@ -36,7 +37,7 @@ const renderApp = () => {
     }
 };
 
-ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
 // I have successfully used history here because I have imported the custom history library
 firebase.auth().onAuthStateChanged((user) => {
