@@ -1,5 +1,9 @@
 import * as firebase from 'firebase';
 
+
+// This is setting up a safe system so that the keys can be hidden and not left in the open.
+// Note the process.env isn't something that is normally accessable from windows. I believe this is
+// a Node command. It has been be using the define plugin within webpack.
 const firebaseConfig = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
